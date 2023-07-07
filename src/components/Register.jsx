@@ -1,4 +1,6 @@
+import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
+import { addUser } from "../redux/loginLogoutReducer";
 
 const Container = styled.div`
   width: 100%;
@@ -29,17 +31,39 @@ const Input = styled.input`
   margin-bottom: 10px;
 `;
 
+const Submit = styled.button``;
+
 const Register = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      addUser({
+        number: e.target.number.value,
+        password: e.target.password.value,
+        confirmPassword: e.target.confirmPassword.value,
+      })
+    );
+  };
+
   return (
     <Container>
       <Title>Register</Title>
-      <Form>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <Label htmlFor="number">Number</Label>
-        <Input placeholder="+880 XXXX XXXXXX" min="11" max="14" />
+        <Input
+          name="number"
+          type="tel"
+          placeholder="01812345678"
+          pattern="[0-9]{5}[0-9]{6}"
+          required
+        />
         <Label htmlFor="password">Password</Label>
-        <Input />
+        <Input name="password" type="password" required />
         <Label htmlFor="password">Confirm Password</Label>
-        <Input />
+        <Input name="confirmPassword" type="password" required />
+        <Submit>Sign Up</Submit>
       </Form>
     </Container>
   );
