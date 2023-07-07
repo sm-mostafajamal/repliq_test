@@ -40,6 +40,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // check if the passwords/confirm password are correct
     if (e.target.password.value === e.target.confirmPassword.value) {
       dispatch(
         addUser({

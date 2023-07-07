@@ -41,14 +41,14 @@ const Wrapper = styled.div`
   display: flex;
   transition: 1s all ease;
   /* changing the the slide by 100vw if it is 2nd slide then 2 * -100vw and so on*/
-  transform: translateX(${(props) => props.slideIndex * -100}vw);
+  transform: translateX(${(props) => props.slideindex * -100}vw);
 `;
 const Slide = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #${(props) => props.bg};
+  background-color: ${(props) => props.bg};
 `;
 const ImgContainer = styled.div`
   height: 100%;
@@ -84,18 +84,23 @@ const Slider = () => {
   const handleClick = (direction) => {
     if (direction === "left") {
       // if the slide index is greater than zero we can go prev slide if zero that go to last slide
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+      return setSlideIndex((prev) =>
+        slideIndex > 0 ? prev - 1 : sliderItems.length - 1
+      );
     } else {
       // or the index is less than last index then we can go next if it is equal it last index then go to first slide
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+      return setSlideIndex((prev) =>
+        slideIndex < sliderItems.length - 1 ? prev + 1 : 0
+      );
     }
   };
+
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
         <ArrowBackIosOutlined />
       </Arrow>
-      <Wrapper slideIndex={slideIndex}>
+      <Wrapper slideindex={slideIndex}>
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
             <ImgContainer>

@@ -1,8 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { addUser } from "../redux/userReducer";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const Container = styled.div`
   width: 100%;
@@ -44,6 +42,7 @@ const Login = () => {
     e.preventDefault();
 
     users.forEach((user) => {
+      // check if login information and the stored user password are same
       if (
         user.number === e.target.number.value &&
         user.password === e.target.password.value
