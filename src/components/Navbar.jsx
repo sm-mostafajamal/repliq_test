@@ -1,6 +1,7 @@
 import { ShoppingCartOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -14,10 +15,13 @@ const Container = styled.div`
   color: white;
 `;
 
-const Logo = styled.h1`
+const Logo = styled(Link)`
   flex: 1;
   font-weight: bold;
   padding-left: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
 `;
 const Wrapper = styled.div`
   flex: 1;
@@ -37,14 +41,17 @@ const Links = styled(Link)`
   color: white;
 `;
 const Navbar = () => {
+  const { carts } = useSelector((state) => state.product);
   return (
     <Container>
-      <Logo>E-COMMERCE</Logo>
+      <Logo to="/">E-COMMERCE</Logo>
       <Wrapper>
         <MenuItem>
-          <Badge badgeContent={4} color="primary">
-            <ShoppingCartOutlined />
-          </Badge>
+          <Links to={"/cart"}>
+            <Badge badgeContent={carts.length} color="primary">
+              <ShoppingCartOutlined />
+            </Badge>
+          </Links>
         </MenuItem>
         <Links to="/login" style={{ textDecoration: "none" }}>
           <MenuItem>LOG OUT</MenuItem>
