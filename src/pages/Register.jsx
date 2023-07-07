@@ -40,14 +40,17 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      addUser({
-        number: e.target.number.value,
-        password: e.target.password.value,
-        confirmPassword: e.target.confirmPassword.value,
-      })
-    );
-    navigate("/login");
+    if (e.target.password.value === e.target.confirmPassword.value) {
+      dispatch(
+        addUser({
+          number: e.target.number.value,
+          password: e.target.password.value,
+        })
+      );
+      navigate("/login");
+    } else {
+      alert("Password Do Not Match !!!");
+    }
   };
 
   return (

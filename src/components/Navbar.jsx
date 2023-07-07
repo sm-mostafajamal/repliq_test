@@ -2,7 +2,10 @@ import React from "react";
 import { styled } from "styled-components";
 
 const Container = styled.div`
-  text-align: center;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Logo = styled.h1`
