@@ -34,7 +34,7 @@ const Input = styled.input`
 
 const Submit = styled.button``;
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const { users } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -47,7 +47,11 @@ const Login = () => {
         user.number === e.target.number.value &&
         user.password === e.target.password.value
       ) {
-        navigate("/home");
+        setUser({
+          number: e.target.number.value,
+          password: e.target.password.value,
+        });
+        navigate("/");
       } else {
         alert("Wrong Credentials !!!");
       }

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Product from "./Product";
-import { products } from "../data";
+import { useSelector } from "react-redux";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -31,42 +31,50 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 const ProductList = () => {
+  const { products } = useSelector((state) => state.product);
+  const [filteredProducts, setFilter] = useState();
+  const handleChange = (e) => {
+    const filtered = products.filter(
+      (product) =>
+        product.color === e.target.value.toLowerCase() ||
+        product.size === e.target.value.toLowerCase()
+    );
+    setFilter(filtered);
+    console.log(filteredProducts);
+  };
+
   return (
     <Container>
-      <FilterContainer>
+      <FilterContainer onChange={(e) => handleChange(e)}>
         <Filter>
           <FilterText>Filter Products: </FilterText>
-          <Select>
+          <Select name="color">
             <Option style={{ display: "none" }}>Color</Option>
-            <Option>Grey</Option>
-            <Option>Black</Option>
-            <Option>Pink</Option>
-            <Option>Brown</Option>
-            <Option>Purple</Option>
-            <Option>Green</Option>
+            <Option value="grey">Grey</Option>
+            <Option value="black">Black</Option>
+            <Option value="pink">Pink</Option>
+            <Option value="brown">Brown</Option>
+            <Option value="purple">Purple</Option>
+            <Option value="green">Green</Option>
           </Select>
-          <Select>
+          <Select name="size">
             <Option style={{ display: "none" }}>Size</Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
-          </Select>
-        </Filter>
-        <Filter>
-          <FilterText>Sort Products:</FilterText>
-          <Select>
-            <Option style={{ display: "none" }}>Newest</Option>
-            <Option>Price (asc)</Option>
-            <Option>Price (desc)</Option>
+            <Option value="xs">XS</Option>
+            <Option value="s">S</Option>
+            <Option value="m">M</Option>
+            <Option value="l">L</Option>
+            <Option value="xl">XL</Option>
           </Select>
         </Filter>
       </FilterContainer>
       <Wrapper>
-        {products.map((product) => (
-          <Product item={product} key={product.id} />
-        ))}
+        {filteredProducts
+          ? filteredProducts.map((product) => (
+              <Product item={product} key={product.id} />
+            ))
+          : products.map((product) => (
+              <Product item={product} key={product.id} />
+            ))}
       </Wrapper>
     </Container>
   );
