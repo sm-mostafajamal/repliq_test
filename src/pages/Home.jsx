@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import ProductList from "../components/ProductList";
 import Slider from "../components/Slider";
 import Register from "./Register";
+import Footer from "../components/Footer";
 
 const Container = styled.div``;
 const Wrapper = styled.div``;
@@ -23,6 +24,7 @@ const Home = ({ user }) => {
           <Slider />
           <Title>Products</Title>
           <ProductList />
+          <Footer />
         </Wrapper>
       ) : (
         <Register />
