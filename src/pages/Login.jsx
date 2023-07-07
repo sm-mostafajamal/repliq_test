@@ -1,6 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { addUser } from "../redux/loginLogoutReducer";
+import { addUser } from "../redux/userReducer";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Container = styled.div`
   width: 100%;
@@ -9,6 +11,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 const Title = styled.h2`
   padding-bottom: 25px;
@@ -33,23 +36,28 @@ const Input = styled.input`
 
 const Submit = styled.button``;
 
-const Register = () => {
-  const dispatch = useDispatch();
+const Login = () => {
+  const { users } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      addUser({
-        number: e.target.number.value,
-        password: e.target.password.value,
-        confirmPassword: e.target.confirmPassword.value,
-      })
-    );
+
+    users.forEach((user) => {
+      if (
+        user.number === e.target.number.value &&
+        user.password === e.target.password.value
+      ) {
+        navigate("/home");
+      } else {
+        alert("Wrong Credentials !!!");
+      }
+    });
   };
 
   return (
     <Container>
-      <Title>Register</Title>
+      <Title>Login</Title>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Label htmlFor="number">Number</Label>
         <Input
@@ -61,12 +69,10 @@ const Register = () => {
         />
         <Label htmlFor="password">Password</Label>
         <Input name="password" type="password" required />
-        <Label htmlFor="password">Confirm Password</Label>
-        <Input name="confirmPassword" type="password" required />
-        <Submit>Sign Up</Submit>
+        <Submit>Log In</Submit>
       </Form>
     </Container>
   );
 };
 
-export default Register;
+export default Login;
