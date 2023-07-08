@@ -1,6 +1,7 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { setUser } from "../redux/userReducer";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -30,32 +31,43 @@ const Input = styled.input`
   outline: none;
   height: 40px;
   margin-bottom: 10px;
+  border: 2px solid teal;
+`;
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
-const Submit = styled.button``;
+const Submit = styled.button`
+  padding: 5px;
+  border: 2px solid teal;
+  background-color: white;
+  cursor: pointer;
+  font-weight: 500;
+  &:hover {
+    background-color: #f8f4f4;
+  }
+`;
 
-const Login = ({ setUser }) => {
+const Login = () => {
   const { users } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    users.forEach((user) => {
-      // check if login information and the stored user password are same
-      if (
+    // check if login information  and the stored user  password are same and exist
+    const user = users.find(
+      (user) =>
         user.number === e.target.number.value &&
         user.password === e.target.password.value
-      ) {
-        setUser({
-          number: e.target.number.value,
-          password: e.target.password.value,
-        });
-        navigate("/");
-      } else {
-        alert("Wrong Credentials !!!");
-      }
-    });
+    );
+    //store user info for persistancy login
+    if (user) {
+      dispatch(setUser(user));
+      window.localStorage.setItem("loggedInUser", JSON.stringify(user));
+    } else {
+      return alert("Wrong Credentials !!!");
+    }
   };
 
   return (
@@ -72,7 +84,12 @@ const Login = ({ setUser }) => {
         />
         <Label htmlFor="password">Password</Label>
         <Input name="password" type="password" required />
-        <Submit>Log In</Submit>
+        <Buttons>
+          <Link to={"/register"}>
+            <Submit>Register</Submit>
+          </Link>
+          <Submit type="submit">Log In</Submit>
+        </Buttons>
       </Form>
     </Container>
   );

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import ProductList from "../components/ProductList";
 import Slider from "../components/Slider";
-import Register from "./Register";
 import Footer from "../components/Footer";
 
 const Container = styled.div``;
@@ -15,20 +14,16 @@ const Title = styled.span`
   justify-content: center;
 `;
 
-const Home = ({ user }) => {
+const Home = ({ setUser }) => {
   return (
     <Container>
-      {user ? (
-        <Wrapper>
-          <Navbar />
-          <Slider />
-          <Title>Products</Title>
-          <ProductList />
-          <Footer />
-        </Wrapper>
-      ) : (
-        <Register />
-      )}
+      <Wrapper>
+        <Navbar />
+        <Slider />
+        <Title>Products</Title>
+        <ProductList />
+        <Footer />
+      </Wrapper>
     </Container>
   );
 };

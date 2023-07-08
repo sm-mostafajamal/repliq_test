@@ -1,9 +1,10 @@
 import { ShoppingCartOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { setUser } from "../redux/userReducer";
 
 const Container = styled.div`
   width: 100%;
@@ -40,8 +41,24 @@ const Links = styled(Link)`
   text-decoration: none;
   color: white;
 `;
+const Button = styled.button`
+  padding: 10px;
+  border: 0.5px solid white;
+  font-weight: 500;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  margin-right: 20px;
+`;
 const Navbar = () => {
+  const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.product);
+
+  const handleClick = () => {
+    dispatch(setUser(null));
+    window.localStorage.removeItem("loggedInUser");
+  };
+
   return (
     <Container>
       <Logo to="/">E-COMMERCE</Logo>
@@ -53,9 +70,7 @@ const Navbar = () => {
             </Badge>
           </Links>
         </MenuItem>
-        <Links to="/login" style={{ textDecoration: "none" }}>
-          <MenuItem>LOG OUT</MenuItem>
-        </Links>
+        <Button onClick={handleClick}>LOG OUT</Button>
       </Wrapper>
     </Container>
   );
