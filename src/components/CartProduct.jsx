@@ -1,5 +1,5 @@
 import { Delete } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import { removeCartProduct } from "../redux/productReducer";
 

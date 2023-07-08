@@ -56,7 +56,7 @@ const Navbar = () => {
 
   const handleClick = () => {
     dispatch(setUser(null));
-    window.localStorage.removeItem("loggedInUser");
+    window.localStorage.clear();
   };
 
   return (
@@ -70,6 +70,9 @@ const Navbar = () => {
             </Badge>
           </Links>
         </MenuItem>
+        <Links to={"/admin"}>
+          <Button>Admin Dashboard</Button>
+        </Links>
         <Button onClick={handleClick}>LOG OUT</Button>
       </Wrapper>
     </Container>

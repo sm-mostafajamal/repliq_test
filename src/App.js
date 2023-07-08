@@ -8,6 +8,7 @@ import Cart from "./pages/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "./redux/productReducer.js";
 import { getUsers, setUser } from "./redux/userReducer";
+import AdminHome from "./pages/Admin/AdminHome";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="product/:id" element={<Product />} />
               <Route path="cart" element={<Cart />} />
+              <Route path="admin" element={<AdminHome />} />
             </>
           ) : (
             <>
