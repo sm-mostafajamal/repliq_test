@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartProduct from "../components/CartProduct";
+import { orderedProducts } from "../services/ecommerce";
+import { emptyCartProduct } from "../redux/productReducer";
 
 const Container = styled.div``;
 
@@ -62,7 +64,7 @@ const Summary = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
-  height: 50vh;
+  height: 50%;
 `;
 
 const SummaryTitle = styled.h1`
@@ -87,10 +89,16 @@ const Button = styled.button`
   background-color: black;
   color: white;
   font-weight: 600;
+  cursor: pointer;
 `;
 
 const Cart = () => {
   const { carts, totalPrice } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const handleClick = async () => {
+    carts.forEach((product) => setTimeout(() => orderedProducts(product), 0));
+    dispatch(emptyCartProduct());
+  };
   return (
     <Container>
       <Navbar />
@@ -103,7 +111,6 @@ const Cart = () => {
           <TopTexts>
             <TopText>Total Items({carts.length})</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           {carts.length ? (
@@ -133,7 +140,8 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>TK {totalPrice}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            {/* posting the ordered products to server-database */}
+            <Button onClick={handleClick}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>

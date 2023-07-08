@@ -105,7 +105,7 @@ const Button = styled.button`
 
 const Product = () => {
   const id = Number(useParams().id);
-  const { products } = useSelector((state) => state.product);
+  const { products, carts } = useSelector((state) => state.product);
   const product = products.find((product) => product.id === id);
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
@@ -120,9 +120,19 @@ const Product = () => {
     }
   };
   const handleSubmit = () => {
-    dispatch(
-      appendCart({ ...product, color: color, size: size, quantity: quantity })
-    );
+    const content = {
+      ...product,
+      color: color,
+      size: size,
+      quantity: quantity,
+    };
+
+    const duplicateProduct = carts.find((product) => product.id === content.id);
+    if (duplicateProduct) {
+      alert("Already added to card please remove if you want to change!!!");
+    } else {
+      dispatch(appendCart(content));
+    }
   };
 
   return (

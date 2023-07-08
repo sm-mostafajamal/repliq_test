@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getAll } from "../services/ecommerce";
 
 const initialState = {
   products: [],
   carts: [],
   totalPrice: 0,
+  isLoading: true,
 };
 
 const productSlice = createSlice({
@@ -14,11 +16,11 @@ const productSlice = createSlice({
       return {
         ...state,
         products: state.products.concat(...action.payload),
+        isLoading: false,
       };
     },
     appendCart: (state, action) => {
       // add cart and total price of cart product
-
       return {
         ...state,
         carts: state.carts.concat(action.payload),
@@ -37,10 +39,29 @@ const productSlice = createSlice({
           state.totalPrice - action.payload.quantity * action.payload.price,
       };
     },
+    emptyCartProduct: (state, action) => {
+      return {
+        ...state,
+        carts: [],
+        totalPrice: 0,
+      };
+    },
   },
 });
 
-export const { appendProducts, appendCart, removeCartProduct } =
-  productSlice.actions;
+export const {
+  appendProducts,
+  appendCart,
+  removeCartProduct,
+  emptyCartProduct,
+} = productSlice.actions;
+
+// fetch all products and append
+export const getAllProducts = () => {
+  return async (dispatch) => {
+    const products = await getAll("/products");
+    dispatch(appendProducts(products));
+  };
+};
 
 export default productSlice.reducer;

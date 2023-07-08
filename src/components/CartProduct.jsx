@@ -1,5 +1,5 @@
 import { Delete } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { removeCartProduct } from "../redux/productReducer";
 
@@ -85,6 +85,7 @@ const CartProduct = ({ product }) => {
   const handleClick = () => {
     dispatch(removeCartProduct(product));
   };
+
   return (
     <Product key={product.id}>
       <ProductDetail>

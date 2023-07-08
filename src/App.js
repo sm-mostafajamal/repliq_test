@@ -1,14 +1,21 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAllProducts } from "./redux/productReducer.js";
 
 function App() {
   const [user, setUser] = useState(true);
+  const dispatch = useDispatch();
 
+  // fetching the data
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <Routes>

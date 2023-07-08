@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { appendProducts } from "../redux/productReducer.js";
-import { useQuery } from "react-query";
-import { getAll } from "../services/ecommerce";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -44,18 +40,8 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 const ProductList = () => {
-  const { products } = useSelector((state) => state.product);
+  const { products, isLoading } = useSelector((state) => state.product);
   const [filteredProducts, setFilter] = useState();
-  const dispatch = useDispatch();
-  // fetching data
-  const { isLoading, data } = useQuery(["products"], () => getAll("products"), {
-    retry: false,
-  });
-  useEffect(() => {
-    if (data) {
-      dispatch(appendProducts(data));
-    }
-  }, [dispatch, data]);
 
   const handleChange = (e) => {
     const filtered = products.filter(
