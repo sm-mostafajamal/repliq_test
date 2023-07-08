@@ -48,13 +48,15 @@ const Bottom = styled.div`
 const Info = styled.div`
   flex: 3;
 `;
+const Empty = styled.div`
+  flex: 3;
 
-const Hr = styled.hr`
-  background-color: #eee;
-  border: none;
-  height: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
 `;
-
 const Summary = styled.div`
   flex: 1;
   border: 0.5px solid lightgray;
@@ -89,7 +91,6 @@ const Button = styled.button`
 
 const Cart = () => {
   const { carts, totalPrice } = useSelector((state) => state.product);
-  console.log(totalPrice);
   return (
     <Container>
       <Navbar />
@@ -105,11 +106,15 @@ const Cart = () => {
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
-          <Info>
-            {carts.map((product) => (
-              <CartProduct product={product} key={product.id} />
-            ))}
-          </Info>
+          {carts.length ? (
+            <Info>
+              {carts.map((product) => (
+                <CartProduct product={product} key={product.id} />
+              ))}
+            </Info>
+          ) : (
+            <Empty>No Items</Empty>
+          )}
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>

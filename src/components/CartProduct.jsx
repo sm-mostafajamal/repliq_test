@@ -1,5 +1,7 @@
 import { Delete } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
+import { removeCartProduct } from "../redux/productReducer";
 
 const Product = styled.div`
   display: flex;
@@ -24,7 +26,9 @@ const Details = styled.div`
   justify-content: space-around;
 `;
 
-const ProductName = styled.span``;
+const ProductName = styled.span`
+  font-size: 20px;
+`;
 
 const ProductId = styled.span``;
 
@@ -52,12 +56,13 @@ const ProductAmountContainer = styled.div`
 `;
 
 const ProductAmount = styled.div`
-  font-size: 24px;
+  font-size: 20px;
   margin: 5px;
+  font-weight: 600;
 `;
 
 const ProductPrice = styled.div`
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 200;
   padding-bottom: 30px;
 `;
@@ -76,6 +81,10 @@ const RemoveProduct = styled.button`
 `;
 
 const CartProduct = ({ product }) => {
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(removeCartProduct(product));
+  };
   return (
     <Product key={product.id}>
       <ProductDetail>
@@ -95,10 +104,10 @@ const CartProduct = ({ product }) => {
       </ProductDetail>
       <PriceDetail>
         <ProductAmountContainer>
-          <ProductAmount>{product.quantity}</ProductAmount>
+          <ProductAmount>Product Quantity: {product.quantity}</ProductAmount>
         </ProductAmountContainer>
         <ProductPrice>TK {product.price * product.quantity}</ProductPrice>
-        <RemoveProduct>
+        <RemoveProduct onClick={handleClick}>
           <Delete />
         </RemoveProduct>
       </PriceDetail>
