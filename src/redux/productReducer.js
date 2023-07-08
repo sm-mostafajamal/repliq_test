@@ -18,6 +18,7 @@ const productSlice = createSlice({
     },
     appendCart: (state, action) => {
       // add cart and total price of cart product
+
       return {
         ...state,
         carts: state.carts.concat(action.payload),

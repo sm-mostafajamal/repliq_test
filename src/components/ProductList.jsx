@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { appendProducts } from "../redux/productReducer.js";
+import { useQuery } from "react-query";
+import { getAll } from "../services/ecommerce";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -9,6 +13,15 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+`;
+const Fetching = styled.span`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 30px;
+  color: purple;
 `;
 const FilterContainer = styled.div`
   display: flex;
@@ -33,6 +46,17 @@ const Option = styled.option``;
 const ProductList = () => {
   const { products } = useSelector((state) => state.product);
   const [filteredProducts, setFilter] = useState();
+  const dispatch = useDispatch();
+  // fetching data
+  const { isLoading, data } = useQuery(["products"], () => getAll("products"), {
+    retry: false,
+  });
+  useEffect(() => {
+    if (data) {
+      dispatch(appendProducts(data));
+    }
+  }, [dispatch, data]);
+
   const handleChange = (e) => {
     const filtered = products.filter(
       (product) =>
@@ -40,7 +64,6 @@ const ProductList = () => {
         product.size === e.target.value.toLowerCase()
     );
     setFilter(filtered);
-    console.log(filteredProducts);
   };
 
   return (
@@ -68,6 +91,7 @@ const ProductList = () => {
         </Filter>
       </FilterContainer>
       <Wrapper>
+        {isLoading && <Fetching>Fetching Data...</Fetching>}
         {filteredProducts
           ? filteredProducts.map((product) => (
               <Product item={product} key={product.id} />
