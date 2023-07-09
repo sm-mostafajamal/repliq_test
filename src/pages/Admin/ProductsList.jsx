@@ -36,7 +36,7 @@ const ProductsList = () => {
     <Container>
       <Sidebar />
       <Wrapper>
-        <Heading title={"Add New Product"} linkTo="" />
+        <Heading title={"Add New Product"} linkTo="/admin/create-product" />
         <TableContainer>
           <Table toShow={productsToShow} />
         </TableContainer>

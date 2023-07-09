@@ -34,10 +34,10 @@ const Image = styled.img`
 
 const Actions = styled.td`
   width: 100%;
+  height: 100px;
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
 `;
 
@@ -71,9 +71,6 @@ const Table = ({ toShow }) => {
                 <Actions>
                   <Link to={`/admin/products-list/${product.id}`}>
                     <Button name="View" />
-                  </Link>
-                  <Link to={``} style={{ texTableDataecoration: "none" }}>
-                    <Button name="Edit" />
                   </Link>
                   <Button onClick={() => handleDelete()} name="Delete" />
                 </Actions>

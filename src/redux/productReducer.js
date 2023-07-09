@@ -13,6 +13,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     appendProducts: (state, action) => {
+      console.log(action.payload);
       return {
         ...state,
         products: state.products.concat(...action.payload),

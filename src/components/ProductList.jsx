@@ -42,7 +42,7 @@ const Option = styled.option``;
 const ProductList = () => {
   const { products, isLoading } = useSelector((state) => state.product);
   const [filteredProducts, setFilter] = useState();
-
+  console.log(products);
   const handleChange = (e) => {
     const filtered = products.filter(
       (product) =>

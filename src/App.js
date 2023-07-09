@@ -12,6 +12,7 @@ import AdminHome from "./pages/Admin/AdminHome";
 // import CustomersLists from "./pages/Admin/CustomerLists";
 import ProductsList from "./pages/Admin/ProductsList";
 import AdminProduct from "./pages/Admin/AdminProduct";
+import CreateProduct from "./pages/Admin/createProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
               <Route index element={<AdminHome />} />
               <Route path="products-list" element={<ProductsList />} />
               <Route path="products-list/:id" element={<AdminProduct />} />
+              <Route path="create-product" element={<CreateProduct />} />
             </Route>
           </Route>
         ) : (

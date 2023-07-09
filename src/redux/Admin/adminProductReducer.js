@@ -12,10 +12,6 @@ const adminProductSlice = createSlice({
   reducers: {
     appendOrderedProducts: (state, action) => {
       state.orderedProducts = [...action.payload];
-      // return {
-      //   ...state,
-      //   orderedProducts: state.orderedProducts.concat(action.payload),
-      // };
     },
   },
 });
