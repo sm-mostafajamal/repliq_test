@@ -14,6 +14,7 @@ import ProductsList from "./pages/Admin/ProductsList";
 import AdminProduct from "./pages/Admin/AdminProduct";
 import CreateProduct from "./pages/Admin/createProduct";
 import OrderList from "./pages/Admin/OrderList";
+import SingleOrderedItem from "./pages/Admin/SingleOrderedItem";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
               <Route path="products-list/:id" element={<AdminProduct />} />
               <Route path="create-product" element={<CreateProduct />} />
               <Route path="order-list" element={<OrderList />} />
+              <Route path="order-list/:id" element={<SingleOrderedItem />} />
             </Route>
           </Route>
         ) : (

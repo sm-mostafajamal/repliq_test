@@ -46,33 +46,35 @@ const Price = styled.span`
   font-weight: 100;
   font-size: 40px;
 `;
-
-const AdminProduct = () => {
+const SingleOrderedItem = () => {
   const id = Number(useParams().id);
-  const { products } = useSelector((state) => state.product);
-  const product = products.find((product) => product.id === id);
+  const { allOrderedProducts } = useSelector((state) => state.pagination);
+  const product = allOrderedProducts.find((product) => product.id === id);
   return (
     <Container>
       <Sidebar />
       <Wrapper>
-        <ImgContainer>
-          <Image src={product.img} />
-        </ImgContainer>
-        <InfoContainer>
-          <Title>{product.title}</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum iste
-            commodi exercitationem ab et ea, eum laborum quisquam, deleniti
-            repellat ratione nesciunt. Minima voluptates quia distinctio ut quod
-            sapiente blanditiis!
-          </Desc>
-          <Detail>Color: {product.color}</Detail>
-          <Detail>Size: {product.size}</Detail>
-          <Price>TK {product.price}</Price>
-        </InfoContainer>
+        <Wrapper>
+          <ImgContainer>
+            <Image src={product.img} />
+          </ImgContainer>
+          <InfoContainer>
+            <Title>{product.title}</Title>
+            <Desc>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum
+              iste commodi exercitationem ab et ea, eum laborum quisquam,
+              deleniti repellat ratione nesciunt. Minima voluptates quia
+              distinctio ut quod sapiente blanditiis!
+            </Desc>
+            {product.color && <Detail>Color: {product.color}</Detail>}
+            {product.size && <Detail>Size: {product.size}</Detail>}
+            <Detail>Quantity: {product.quantity}</Detail>
+            <Price>TK {product.price * product.quantity}</Price>
+          </InfoContainer>
+        </Wrapper>
       </Wrapper>
     </Container>
   );
 };
 
-export default AdminProduct;
+export default SingleOrderedItem;

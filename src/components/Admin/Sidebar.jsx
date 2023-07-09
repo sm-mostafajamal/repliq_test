@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   width: 20%;
-  // flex: 1;
   border-right: 0.5px solid rgb(228, 225, 225);
   min-height: 100vh;
 `;

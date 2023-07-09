@@ -18,21 +18,16 @@ const paginationSlice = createSlice({
     },
     setPageNumber: (state, action) => {
       console.log(action.payload);
-
       state.currentPageNumber = action.payload.pageNumber;
       const productsPerPage = 5;
       let totalPage = 0;
       // check the page req coming from
       if (action.payload.page === "productLists") {
         totalPage = Math.ceil(state.allProducts.length / productsPerPage);
-        // if (state.allProducts.length <= productsPerPage)
-        //   state.currentPageNumber = 1;
       } else if (action.payload.page === "orderedProducts") {
         totalPage = Math.ceil(
           state.allOrderedProducts.length / productsPerPage
         );
-        if (state.allOrderedProducts.length <= productsPerPage)
-          state.currentPageNumber = 1;
       }
 
       state.pageNumbers = [];

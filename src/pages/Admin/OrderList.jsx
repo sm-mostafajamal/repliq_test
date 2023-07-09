@@ -5,10 +5,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/Admin/Button";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../components/Admin/Pagination";
-import {
-  getAllOrderedProducts,
-  setPageNumber,
-} from "../../redux/Admin/paginationReducer";
+import { setPageNumber } from "../../redux/Admin/paginationReducer";
 
 const Container = styled.div`
   width: 100%;
@@ -66,10 +63,9 @@ const TableDataFooter = styled.td`
 
 const OrderList = () => {
   const dispatch = useDispatch();
-  const { orderedProductsToShow, currentPageNumber, allOrderedProducts } =
-    useSelector((state) => state.pagination);
-
-  console.log(allOrderedProducts);
+  const { orderedProductsToShow, currentPageNumber } = useSelector(
+    (state) => state.pagination
+  );
 
   useEffect(() => {
     dispatch(
