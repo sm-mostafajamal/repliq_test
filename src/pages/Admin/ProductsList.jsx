@@ -26,7 +26,6 @@ const ProductsList = () => {
   const { productsToShow, currentPageNumber } = useSelector(
     (state) => state.pagination
   );
-  console.log();
   useEffect(() => {
     if (products) {
       dispatch(appendProducts(products));

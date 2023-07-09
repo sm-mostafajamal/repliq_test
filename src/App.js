@@ -11,6 +11,7 @@ import { getUsers, setUser } from "./redux/userReducer";
 import AdminHome from "./pages/Admin/AdminHome";
 // import CustomersLists from "./pages/Admin/CustomerLists";
 import ProductsList from "./pages/Admin/ProductsList";
+import AdminProduct from "./pages/Admin/AdminProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,25 +34,25 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/">
-          {user ? (
-            <>
-              <Route path="*" element={<Navigate to="/" replace />} />
-              <Route index element={<Home />} />
-              <Route path="product/:id" element={<Product />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="admin" element={<AdminHome />} />
-              {/* <Route path="admin/customers" element={<CustomersLists />} /> */}
-              <Route path="admin/products-list" element={<ProductsList />} />
-            </>
-          ) : (
-            <>
-              <Route path="/" element={<Navigate to="register" />} />
-              <Route path="register" element={<Register />} />
-              <Route path="login" element={<Login />} />
-            </>
-          )}
-        </Route>
+        {user ? (
+          <Route path="/">
+            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route index element={<Home />} />
+            <Route path="product/:id" element={<Product />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="admin/">
+              <Route index element={<AdminHome />} />
+              <Route path="products-list" element={<ProductsList />} />
+              <Route path="products-list/:id" element={<AdminProduct />} />
+            </Route>
+          </Route>
+        ) : (
+          <>
+            <Route path="/" element={<Navigate replace to="register" />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );

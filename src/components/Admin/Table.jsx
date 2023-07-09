@@ -69,7 +69,7 @@ const Table = ({ toShow }) => {
                 <TableData>{product.price}</TableData>
 
                 <Actions>
-                  <Link to={``}>
+                  <Link to={`/admin/products-list/${product.id}`}>
                     <Button name="View" />
                   </Link>
                   <Link to={``} style={{ texTableDataecoration: "none" }}>
