@@ -4,6 +4,7 @@ import Sidebar from "../../components/Admin/Sidebar";
 import { createProduct } from "../../services/admin/adminServices";
 import { appendProducts } from "../../redux/productReducer";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -107,6 +108,7 @@ const CreateProduct = () => {
                 <File
                   type="file"
                   id="file"
+                  accept="image/x-png,image/gif,image/jpeg,image/jpg"
                   onChange={(e) =>
                     setFile(URL.createObjectURL(e.target.files[0]))
                   }
@@ -158,7 +160,9 @@ const CreateProduct = () => {
               </AddProduct>
             </Right>
           </FormInfo>
-          <Button onClick={handleClick}>Create</Button>
+          <Link to={"/admin/products-list"}>
+            <Button onClick={handleClick}>Create</Button>
+          </Link>
         </Form>
       </Wrapper>
     </Container>

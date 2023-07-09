@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import Button from "./Button";
 import Pagination from "./Pagination";
+import { deleteProduct } from "../../services/admin/adminServices";
+import { useDispatch, useSelector } from "react-redux";
+import { removeProduct } from "../../redux/productReducer";
 
 const Container = styled.div``;
 const TableContainer = styled.table`
@@ -45,7 +48,13 @@ const Tablefooter = styled.tfoot``;
 const TableDataFooter = styled.td``;
 
 const Table = ({ toShow }) => {
-  const handleDelete = () => {};
+  const { products } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const handleDelete = async (product) => {
+    const updatedProducts = products.filter((p) => p.id !== product.id);
+    deleteProduct(product.id);
+    dispatch(removeProduct(updatedProducts));
+  };
   return (
     <Container>
       <TableContainer cellSpacing="0" frame="void" rules="rows">
@@ -72,7 +81,7 @@ const Table = ({ toShow }) => {
                   <Link to={`/admin/products-list/${product.id}`}>
                     <Button name="View" />
                   </Link>
-                  <Button onClick={() => handleDelete()} name="Delete" />
+                  <Button onClick={() => handleDelete(product)} name="Delete" />
                 </Actions>
               </Body>
             ))

@@ -13,12 +13,14 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     appendProducts: (state, action) => {
-      console.log(action.payload);
       return {
         ...state,
         products: state.products.concat(...action.payload),
         isLoading: false,
       };
+    },
+    removeProduct: (state, action) => {
+      state.products = [...action.payload];
     },
     appendCart: (state, action) => {
       // add cart and total price of cart product
@@ -52,6 +54,7 @@ const productSlice = createSlice({
 
 export const {
   appendProducts,
+  removeProduct,
   appendCart,
   removeCartProduct,
   emptyCartProduct,
