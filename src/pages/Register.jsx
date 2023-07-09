@@ -68,8 +68,8 @@ const Register = () => {
     e.preventDefault();
 
     // Check if user exists
-    const user = users.find((user) => user.number === e.target.number.value);
-    if (user.length) return alert("User already exists!!!");
+    const user = users.find((user) => user.number === inputs.number);
+    if (user) return alert("User already exists!!!");
 
     // check if the passwords/confirm password are correct
     if (e.target.password.value === e.target.confirmPassword.value) {

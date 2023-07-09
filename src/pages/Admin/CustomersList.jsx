@@ -95,13 +95,13 @@ const CustomersList = () => {
           <TableBody>
             {usersToShow.length ? (
               usersToShow.map((customer) => (
-                <Body key={customer.id}>
+                <Body key={customer.number}>
                   <TableData>{customer.fullName}</TableData>
                   <TableData>{customer.number}</TableData>
                   <TableData>{customer.email}</TableData>
                   <TableData>{customer.address}</TableData>
                   <Actions>
-                    <Link to={`/admin/customer-list/${customer.id}`}>
+                    <Link to={`/admin/customers-list/${customer.id}`}>
                       <Button name="View" />
                     </Link>
                   </Actions>

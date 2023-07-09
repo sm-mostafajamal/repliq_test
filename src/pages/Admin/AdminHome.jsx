@@ -20,10 +20,11 @@ const Widgets = styled.div`
   padding-top: 20px;
 `;
 const AdminHome = () => {
-  const { users } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
   const { allOrderedProducts } = useSelector((state) => state.pagination);
-  const dispatch = useDispatch();
+  const money = allOrderedProducts.map((p) => Number(p.price));
+  const totalRevenue = money.reduce((acc, curr) => acc + curr, 0);
 
   useEffect(() => {
     // dispatching to redux thunk adminOrderProductReducer
@@ -34,7 +35,7 @@ const AdminHome = () => {
       <Sidebar />
       <Wrapper>
         <Widgets>
-          <Widget title="Total Customers" value={users.length} />
+          <Widget title="Total Revenue" value={`Taka: ${totalRevenue}`} />
           <Widget title="Total Orders" value={allOrderedProducts.length} />
           <Widget title="Total Products" value={products.length} />
         </Widgets>

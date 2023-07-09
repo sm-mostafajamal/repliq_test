@@ -66,6 +66,10 @@ const SingleOrderedItem = () => {
               deleniti repellat ratione nesciunt. Minima voluptates quia
               distinctio ut quod sapiente blanditiis!
             </Desc>
+            {product.fullName && <Detail>Order By: {product.fullName}</Detail>}
+            {product.color && <Detail>Color: {product.color}</Detail>}
+            {product.color && <Detail>Color: {product.color}</Detail>}
+
             {product.color && <Detail>Color: {product.color}</Detail>}
             {product.size && <Detail>Size: {product.size}</Detail>}
             <Detail>Quantity: {product.quantity}</Detail>
