@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "./redux/productReducer.js";
 import { getUsers, setUser } from "./redux/userReducer";
 import AdminHome from "./pages/Admin/AdminHome";
+// import CustomersLists from "./pages/Admin/CustomerLists";
+import ProductsList from "./pages/Admin/ProductsList";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +41,8 @@ function App() {
               <Route path="product/:id" element={<Product />} />
               <Route path="cart" element={<Cart />} />
               <Route path="admin" element={<AdminHome />} />
+              {/* <Route path="admin/customers" element={<CustomersLists />} /> */}
+              <Route path="admin/products-list" element={<ProductsList />} />
             </>
           ) : (
             <>

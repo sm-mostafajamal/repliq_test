@@ -14,7 +14,7 @@ const Title = styled.span`
   justify-content: center;
 `;
 
-const Home = ({ setUser }) => {
+const Home = () => {
   return (
     <Container>
       <Wrapper>
