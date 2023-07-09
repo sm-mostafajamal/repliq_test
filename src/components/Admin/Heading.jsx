@@ -15,10 +15,10 @@ const Container = styled.div`
 const Button = styled.button`
   width: 200px;
   background-color: transparent;
-  color: #e85a4f;
+  color: teal;
   font-weight: 500;
   padding: 5px;
-  border: 1px solid #e85a4f;
+  border: 1px solid teal;
   font-size: 18px;
   border-radius: 5px;
   cursor: pointer;

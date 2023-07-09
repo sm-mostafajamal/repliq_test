@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import Sidebar from "../../components/Admin/Sidebar";
-import { Link } from "react-router-dom";
 import Heading from "../../components/Admin/Heading";
 import Table from "../../components/Admin/Table";
+import {
+  appendProducts,
+  setPageNumber,
+} from "../../redux/Admin/paginationReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 100%;
@@ -14,27 +18,28 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const Button = styled.button`
-  width: 200px;
-  background-color: transparent;
-  color: #e85a4f;
-  font-weight: 500;
-  padding: 5px;
-  border: 1px solid #e85a4f;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-`;
 const TableContainer = styled.div``;
 
 const ProductsList = () => {
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.product);
+  const { productsToShow, currentPageNumber } = useSelector(
+    (state) => state.pagination
+  );
+  console.log();
+  useEffect(() => {
+    if (products) {
+      dispatch(appendProducts(products));
+      dispatch(setPageNumber(currentPageNumber));
+    }
+  }, [dispatch, currentPageNumber, products]);
   return (
     <Container>
       <Sidebar />
       <Wrapper>
         <Heading title={"Add New Product"} linkTo="" />
         <TableContainer>
-          <Table />
+          <Table toShow={productsToShow} />
         </TableContainer>
       </Wrapper>
     </Container>

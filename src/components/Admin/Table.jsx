@@ -1,9 +1,8 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import Button from "./Button";
-import { useSelector } from "react-redux";
+import Pagination from "./Pagination";
 
 const Container = styled.div``;
 const TableContainer = styled.table`
@@ -45,9 +44,7 @@ const Actions = styled.td`
 const Tablefooter = styled.tfoot``;
 const TableDataFooter = styled.td``;
 
-const Table = () => {
-  const { products } = useSelector((state) => state.product);
-
+const Table = ({ toShow }) => {
   const handleDelete = () => {};
   return (
     <Container>
@@ -62,8 +59,8 @@ const Table = () => {
         </TableHead>
 
         <TableBody>
-          {products.length ? (
-            products.map((product) => (
+          {toShow.length ? (
+            toShow.map((product) => (
               <Body key={product.id}>
                 <TableData>
                   <Image src={product.img} />
@@ -88,7 +85,13 @@ const Table = () => {
             </Row>
           )}
         </TableBody>
-        <Tablefooter></Tablefooter>
+        <Tablefooter>
+          <Row>
+            <TableDataFooter>
+              <Pagination />
+            </TableDataFooter>
+          </Row>
+        </Tablefooter>
       </TableContainer>
     </Container>
   );
