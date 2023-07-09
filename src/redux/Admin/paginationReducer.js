@@ -6,10 +6,12 @@ const paginationSlice = createSlice({
   initialState: {
     allProducts: [],
     allOrderedProducts: [],
+    allUsers: [],
     pageNumbers: [],
-    currentPageNumber: 1,
     productsToShow: [],
     orderedProductsToShow: [],
+    usersToShow: [],
+    currentPageNumber: 1,
   },
   reducers: {
     appendProducts: (state, action) => {
@@ -17,17 +19,19 @@ const paginationSlice = createSlice({
       state.allProducts = [...action.payload];
     },
     setPageNumber: (state, action) => {
-      console.log(action.payload);
       state.currentPageNumber = action.payload.pageNumber;
       const productsPerPage = 5;
       let totalPage = 0;
-      // check the page req coming from
+
+      // check which page the req coming from
       if (action.payload.page === "productLists") {
         totalPage = Math.ceil(state.allProducts.length / productsPerPage);
       } else if (action.payload.page === "orderedProducts") {
         totalPage = Math.ceil(
           state.allOrderedProducts.length / productsPerPage
         );
+      } else if (action.payload.page === "CustomersList") {
+        totalPage = Math.ceil(state.allUsers.length / productsPerPage);
       }
 
       state.pageNumbers = [];
@@ -37,7 +41,7 @@ const paginationSlice = createSlice({
       const lastProductIndex = state.currentPageNumber * productsPerPage;
       const firstProductIndex = lastProductIndex - productsPerPage;
 
-      // check the page req coming from
+      // check the page req and append to the specific page state
       if (
         state.currentPageNumber > 0 &&
         state.currentPageNumber <= totalPage &&
@@ -56,17 +60,34 @@ const paginationSlice = createSlice({
           firstProductIndex,
           lastProductIndex
         );
+      } else if (
+        state.currentPageNumber > 0 &&
+        state.currentPageNumber <= totalPage &&
+        action.payload.page === "CustomersList"
+      ) {
+        state.usersToShow = state.allUsers.slice(
+          firstProductIndex,
+          lastProductIndex
+        );
       }
     },
     appendAllOrderedProducts: (state, action) => {
       // console.log(action.payload);
       state.allOrderedProducts = [...action.payload];
     },
+    appendAllUsers: (state, action) => {
+      // console.log(action.payload);
+      state.allUsers = [...action.payload];
+    },
   },
 });
 
-export const { appendProducts, appendAllOrderedProducts, setPageNumber } =
-  paginationSlice.actions;
+export const {
+  appendProducts,
+  appendAllOrderedProducts,
+  appendAllUsers,
+  setPageNumber,
+} = paginationSlice.actions;
 
 // fetch all ordered products and append
 export const getAllOrderedProducts = () => {

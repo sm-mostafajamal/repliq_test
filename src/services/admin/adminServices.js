@@ -9,6 +9,7 @@ export const getOrderedProducts = (route) =>
 // create new product
 export const createProduct = (data) =>
   axios.post(`${baseURL}/products`, data).then((res) => res.data);
+
 // delete  product
 export const deleteProduct = (id) =>
   axios.delete(`${baseURL}/products/${id}`).then((res) => res.data);

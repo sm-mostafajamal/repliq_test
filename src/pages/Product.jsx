@@ -120,18 +120,25 @@ const Product = () => {
     }
   };
   const handleSubmit = () => {
-    const content = {
-      ...product,
-      color: color,
-      size: size,
-      quantity: quantity,
-    };
+    const loggedInUserJSON = window.localStorage.getItem("loggedInUser");
+    if (loggedInUserJSON) {
+      const loggedInUser = JSON.parse(loggedInUserJSON);
+      const content = {
+        ...product,
+        ...loggedInUser,
+        color: color,
+        size: size,
+        quantity: quantity,
+      };
 
-    const duplicateProduct = carts.find((product) => product.id === content.id);
-    if (duplicateProduct) {
-      alert("Already added to card please remove if you want to change!!!");
-    } else {
-      dispatch(appendCart(content));
+      const duplicateProduct = carts.find(
+        (product) => product.id === content.id
+      );
+      if (duplicateProduct) {
+        alert("Already added to card please remove if you want to change!!!");
+      } else {
+        dispatch(appendCart(content));
+      }
     }
   };
 

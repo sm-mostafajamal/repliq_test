@@ -84,6 +84,7 @@ const OrderList = () => {
         <TableContainer cellSpacing="0" frame="void" rules="rows">
           <TableHead>
             <Row>
+              <TableTitle>Ordered By</TableTitle>
               <TableTitle>Image</TableTitle>
               <TableTitle>Product Name</TableTitle>
               <TableTitle>Product quantity</TableTitle>
@@ -96,6 +97,9 @@ const OrderList = () => {
             {orderedProductsToShow.length ? (
               orderedProductsToShow.map((product) => (
                 <Body key={product.id}>
+                  <TableData>
+                    {product.fullName ? product.fullName : product.number}
+                  </TableData>
                   <TableData>
                     <Image src={product.img} />
                   </TableData>

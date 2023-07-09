@@ -39,7 +39,11 @@ const ProductsList = () => {
     <Container>
       <Sidebar />
       <Wrapper>
-        <Heading title={"Add New Product"} linkTo="/admin/create-product" />
+        <Heading
+          title={"Add New Product"}
+          linkTo="/admin/create-product"
+          name={"Product"}
+        />
         <TableContainer>
           <Table toShow={productsToShow} />
         </TableContainer>

@@ -103,7 +103,7 @@ const Sidebar = () => {
             </List>
           </Link>
           <Title>MENU</Title>
-          <Link to="/admin/customers" style={{ textDecoration: "none" }}>
+          <Link to="/admin/customers-list" style={{ textDecoration: "none" }}>
             <List>
               <PeopleAltOutlined
                 style={{
@@ -136,16 +136,17 @@ const Sidebar = () => {
               <Name>Product List</Name>
             </List>
           </Link>
-
-          <List>
-            <LogoutOutlined
-              style={{
-                fontSize: "18px",
-                color: "black",
-              }}
-            />
-            <Name onClick={handleClick}>Logout</Name>
-          </List>
+          <Link to={"/"}>
+            <List>
+              <LogoutOutlined
+                style={{
+                  fontSize: "18px",
+                  color: "black",
+                }}
+              />
+              <Name onClick={handleClick}>Logout</Name>
+            </List>
+          </Link>
         </Menu>
       </Center>
     </Container>

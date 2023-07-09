@@ -23,12 +23,12 @@ const Button = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
-const Heading = ({ title, linkTo }) => {
+const Heading = ({ title, linkTo, name }) => {
   return (
     <Container className="addJob">
       {title}
       <Link to={linkTo} style={{ textDecoration: "none" }}>
-        <Button>Create</Button>
+        <Button>Add {name}</Button>
       </Link>
     </Container>
   );
