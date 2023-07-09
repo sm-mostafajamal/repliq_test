@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { setPageNumber } from "../../redux/Admin/paginationReducer";
@@ -39,9 +39,9 @@ const Pagination = () => {
 
   const handleClick = (operation) => {
     if (operation === "prev" && currentPageNumber) {
-      dispatch(setPageNumber(currentPageNumber - 1));
+      dispatch(setPageNumber({ pageNumber: currentPageNumber - 1 }));
     } else if (pageNumbers.length > currentPageNumber) {
-      dispatch(setPageNumber(currentPageNumber + 1));
+      dispatch(setPageNumber({ pageNumber: currentPageNumber + 1 }));
     }
   };
   return (
@@ -50,7 +50,9 @@ const Pagination = () => {
       {pageNumbers.map((pageNumber) => (
         <Button
           key={pageNumber}
-          onClick={(e) => dispatch(setPageNumber(Number(e.target.innerText)))}
+          onClick={(e) =>
+            dispatch(setPageNumber({ pageNumber: Number(e.target.innerText) }))
+          }
           className={pageNumber === currentPageNumber ? "active" : undefined}
         >
           {pageNumber}

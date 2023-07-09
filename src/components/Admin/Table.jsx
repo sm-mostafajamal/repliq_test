@@ -56,6 +56,7 @@ const TableDataFooter = styled.td`
 const Table = ({ toShow }) => {
   const { products } = useSelector((state) => state.product);
   const dispatch = useDispatch();
+
   const handleDelete = async (product) => {
     const updatedProducts = products.filter((p) => p.id !== product.id);
     deleteProduct(product.id);

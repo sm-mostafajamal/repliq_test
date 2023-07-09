@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import Sidebar from "../../components/Admin/Sidebar";
 import { Link } from "react-router-dom";
 import Button from "../../components/Admin/Button";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../components/Admin/Pagination";
-import { setPageNumber } from "../../redux/Admin/paginationReducer";
+import {
+  getAllOrderedProducts,
+  setPageNumber,
+} from "../../redux/Admin/paginationReducer";
 
 const Container = styled.div`
   width: 100%;
@@ -62,7 +65,21 @@ const TableDataFooter = styled.td`
 `;
 
 const OrderList = () => {
-  const { orderedProducts } = useSelector((state) => state.orderedProducts);
+  const dispatch = useDispatch();
+  const { orderedProductsToShow, currentPageNumber, allOrderedProducts } =
+    useSelector((state) => state.pagination);
+
+  console.log(allOrderedProducts);
+
+  useEffect(() => {
+    dispatch(
+      setPageNumber({
+        page: "orderedProducts",
+        pageNumber: currentPageNumber,
+      })
+    );
+  }, [dispatch, currentPageNumber]);
+
   return (
     <Container>
       <Sidebar />
@@ -80,8 +97,8 @@ const OrderList = () => {
           </TableHead>
 
           <TableBody>
-            {orderedProducts.length ? (
-              orderedProducts.map((product) => (
+            {orderedProductsToShow.length ? (
+              orderedProductsToShow.map((product) => (
                 <Body key={product.id}>
                   <TableData>
                     <Image src={product.img} />
@@ -91,7 +108,7 @@ const OrderList = () => {
                   <TableData>{product.price * product.quantity}</TableData>
 
                   <Actions>
-                    <Link to={`/admin/products-list/${product.id}`}>
+                    <Link to={`/admin/order-list/${product.id}`}>
                       <Button name="View" />
                     </Link>
                   </Actions>

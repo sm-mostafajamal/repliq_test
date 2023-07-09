@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import Sidebar from "../../components/Admin/Sidebar";
 import Widget from "../../components/Admin/Widget";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrderedProducts } from "../../redux/Admin/adminProductReducer";
+import { getAllOrderedProducts } from "../../redux/Admin/paginationReducer";
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const Widgets = styled.div`
 const AdminHome = () => {
   const { users } = useSelector((state) => state.user);
   const { products } = useSelector((state) => state.product);
-  const { orderedProducts } = useSelector((state) => state.orderedProducts);
+  const { allOrderedProducts } = useSelector((state) => state.pagination);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const AdminHome = () => {
       <Wrapper>
         <Widgets>
           <Widget title="Total Customers" value={users.length} />
-          <Widget title="Total Orders" value={orderedProducts.length} />
+          <Widget title="Total Orders" value={allOrderedProducts.length} />
           <Widget title="Total Products" value={products.length} />
         </Widgets>
       </Wrapper>

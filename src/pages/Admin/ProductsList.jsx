@@ -29,9 +29,12 @@ const ProductsList = () => {
   useEffect(() => {
     if (products) {
       dispatch(appendProducts(products));
-      dispatch(setPageNumber(currentPageNumber));
+      dispatch(
+        setPageNumber({ page: "productLists", pageNumber: currentPageNumber })
+      );
     }
   }, [dispatch, currentPageNumber, products]);
+
   return (
     <Container>
       <Sidebar />
