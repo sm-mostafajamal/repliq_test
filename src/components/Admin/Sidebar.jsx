@@ -115,7 +115,7 @@ const Sidebar = () => {
               <Name>Customers List</Name>
             </List>
           </Link>
-          <Link to="" style={{ textDecoration: "none" }}>
+          <Link to="/admin/order-list" style={{ textDecoration: "none" }}>
             <List>
               <ShoppingBag
                 style={{

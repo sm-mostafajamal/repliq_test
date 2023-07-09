@@ -13,6 +13,7 @@ import AdminHome from "./pages/Admin/AdminHome";
 import ProductsList from "./pages/Admin/ProductsList";
 import AdminProduct from "./pages/Admin/AdminProduct";
 import CreateProduct from "./pages/Admin/createProduct";
+import OrderList from "./pages/Admin/OrderList";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
               <Route path="products-list" element={<ProductsList />} />
               <Route path="products-list/:id" element={<AdminProduct />} />
               <Route path="create-product" element={<CreateProduct />} />
+              <Route path="order-list" element={<OrderList />} />
             </Route>
           </Route>
         ) : (

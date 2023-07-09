@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getOrderedProducts } from "../../services/ecommerce";
+import { getOrderedProducts } from "../../services/admin/adminServices";
 
 const initialState = {
   orderedProducts: [],

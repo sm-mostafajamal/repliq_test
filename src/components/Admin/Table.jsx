@@ -13,7 +13,9 @@ const TableContainer = styled.table`
   height: 70vh;
 `;
 const TableHead = styled.thead``;
-const Row = styled.tr``;
+const Row = styled.tr`
+  position: relative;
+`;
 const TableTitle = styled.th`
   width: 15%;
   padding: 10px;
@@ -45,7 +47,11 @@ const Actions = styled.td`
 `;
 
 const Tablefooter = styled.tfoot``;
-const TableDataFooter = styled.td``;
+const TableDataFooter = styled.td`
+  width: 30%;
+  position: absolute;
+  margin: 50px;
+`;
 
 const Table = ({ toShow }) => {
   const { products } = useSelector((state) => state.product);
@@ -76,7 +82,6 @@ const Table = ({ toShow }) => {
                 </TableData>
                 <TableData>{product.title}</TableData>
                 <TableData>{product.price}</TableData>
-
                 <Actions>
                   <Link to={`/admin/products-list/${product.id}`}>
                     <Button name="View" />

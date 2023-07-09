@@ -16,11 +16,3 @@ export const orderedProducts = (data) =>
     .post(`${baseURL}/orderedProducts`, data)
     .then((res) => res.data)
     .catch((err) => console.error("Already added same product to database!!!"));
-
-// get all orderedProducts from the backend
-export const getOrderedProducts = (route) =>
-  axios({
-    method: "get",
-    url: route,
-    baseURL: baseURL,
-  }).then((res) => res.data);

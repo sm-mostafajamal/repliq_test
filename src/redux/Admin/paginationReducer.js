@@ -29,10 +29,7 @@ const paginationSlice = createSlice({
       const lastProductIndex = state.currentPageNumber * productsPerPage;
       const firstProductIndex = lastProductIndex - productsPerPage;
 
-      if (
-        state.currentPageNumber >= 0 &&
-        state.currentPageNumber <= totalPage
-      ) {
+      if (state.currentPageNumber > 0 && state.currentPageNumber <= totalPage) {
         state.productsToShow = state.allProducts.slice(
           firstProductIndex,
           lastProductIndex

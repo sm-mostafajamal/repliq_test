@@ -98,6 +98,7 @@ const Cart = () => {
   const handleClick = async () => {
     carts.forEach((product) => setTimeout(() => orderedProducts(product), 0));
     dispatch(emptyCartProduct());
+    alert("Thank you for your order !!!");
   };
   return (
     <Container>
