@@ -18,7 +18,6 @@ const Button = ({ name, onClick }) => {
     <Container>
       <Btn
         onClick={onClick}
-        className="button"
         style={
           name === "Delete"
             ? { backgroundColor: "red" }

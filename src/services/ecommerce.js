@@ -8,7 +8,9 @@ export const getAll = (route) =>
     method: "get",
     url: route,
     baseURL: baseURL,
-  }).then((res) => res.data);
+  })
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
 
 // post the checkout product
 export const orderedProducts = (data) =>

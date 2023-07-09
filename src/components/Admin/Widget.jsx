@@ -33,10 +33,10 @@ const Right = styled.div`
 
 const Widget = ({ title, value }) => {
   return (
-    <Container className="widget">
-      <Left className="left">
-        <Title className="title">{title}</Title>
-        <Counter className="counter">{value}</Counter>
+    <Container>
+      <Left>
+        <Title>{title}</Title>
+        <Counter>{value}</Counter>
       </Left>
       <Right className="right"></Right>
     </Container>

@@ -2,8 +2,15 @@ import axios from "axios";
 
 const baseURL = "https://fake-server-dc3h.onrender.com/users";
 
-export const getAllUser = () => axios.get(baseURL).then((res) => res.data);
+export const getAllUser = () =>
+  axios
+    .get(baseURL)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
 
 // create new user
 export const createNewUser = (data) =>
-  axios.post(baseURL, data).then((res) => res.data);
+  axios
+    .post(baseURL, data)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));

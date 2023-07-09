@@ -13,6 +13,15 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 100%;
 `;
+const Article = styled.p`
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: #00000042;
+`;
 const Widgets = styled.div`
   width: 100%;
   display: flex;
@@ -39,6 +48,7 @@ const AdminHome = () => {
           <Widget title="Total Orders" value={allOrderedProducts.length} />
           <Widget title="Total Products" value={products.length} />
         </Widgets>
+        <Article> Welcome</Article>
       </Wrapper>
     </Container>
   );

@@ -87,7 +87,6 @@ const CustomerDetails = () => {
   const customerOrders = allOrderedProducts.filter(
     (product) => product.number === user.number
   );
-  console.log(customerOrders);
   return (
     <Container>
       <Sidebar />

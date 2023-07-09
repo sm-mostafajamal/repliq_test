@@ -55,7 +55,6 @@ function App() {
               <Route path="order-list/:id" element={<SingleOrderedItem />} />
               <Route path="customers-list" element={<CustomersList />} />
               <Route path="customers-list/:id" element={<CustomerDetails />} />
-
               <Route path="add-customer" element={<AddNewCustomer />} />
             </Route>
           </Route>

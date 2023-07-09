@@ -38,14 +38,14 @@ const Pagination = () => {
     pageNumbers.length === 0 ? { display: "none" } : { display: "" };
 
   const handleClick = (operation) => {
-    if (operation === "prev" && currentPageNumber) {
+    if (currentPageNumber > 1 && operation === "prev") {
       dispatch(setPageNumber({ pageNumber: currentPageNumber - 1 }));
     } else if (pageNumbers.length > currentPageNumber) {
       dispatch(setPageNumber({ pageNumber: currentPageNumber + 1 }));
     }
   };
   return (
-    <Container className="pagination" style={style}>
+    <Container style={style}>
       <Button onClick={() => handleClick("prev")}>Prev</Button>
       {pageNumbers.map((pageNumber) => (
         <Button

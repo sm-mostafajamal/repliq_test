@@ -75,7 +75,6 @@ const OrderList = () => {
       })
     );
   }, [dispatch, currentPageNumber]);
-
   return (
     <Container>
       <Sidebar />
