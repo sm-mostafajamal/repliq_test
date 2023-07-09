@@ -105,13 +105,15 @@ const Button = styled.button`
 
 const Product = () => {
   const id = Number(useParams().id);
-  const { products, carts } = useSelector((state) => state.product);
+  const { products } = useSelector((state) => state.product);
   const product = products.find((product) => product.id === id);
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
-
+  const generateId = () => {
+    return Math.round(Math.random() * 10000);
+  };
   const handleClick = (operation) => {
     if (operation === "add") {
       setQuantity((prev) => prev + 1);
@@ -126,19 +128,13 @@ const Product = () => {
       const content = {
         ...product,
         ...loggedInUser,
+        id: generateId(),
         color: color,
         size: size,
         quantity: quantity,
       };
 
-      const duplicateProduct = carts.find(
-        (product) => product.id === content.id
-      );
-      if (duplicateProduct) {
-        alert("Already added to card please remove if you want to change!!!");
-      } else {
-        dispatch(appendCart(content));
-      }
+      dispatch(appendCart(content));
     }
   };
 

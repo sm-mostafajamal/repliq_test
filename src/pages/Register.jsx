@@ -54,7 +54,6 @@ const Submit = styled.button`
 const Register = () => {
   const { users } = useSelector((state) => state.user);
   const [inputs, setInputs] = useState({});
-  console.log(users);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
